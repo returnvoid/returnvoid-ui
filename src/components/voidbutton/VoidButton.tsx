@@ -1,21 +1,18 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 
 export interface VoidButtonProps {
     label: string;
-    children: ReactNode;
 }
 
-const VoidButton = ({ label, children }) => {
+const VoidButton = ({ label, ...props }) => {
     const [text, setText] = useState(label);
     useEffect(() => {
-        console.log('🚀 ~ file: VoidButton.tsx ~ line 14 ~ VoidButton ~ label', label);
         setText(label);
     }, [label]);
 
     return (
-        <button>
-            {text} {children}
+        <button {...props}>
+            {text}
         </button>
     );
 };
