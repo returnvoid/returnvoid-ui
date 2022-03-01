@@ -1,11 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-
+import useTheme from '../../hooks/useThemeProvider';
 interface IVoidButton {
     mode?: string;
     size?: string;
     rounded?: boolean;
     block?: boolean;
+    theme: string;
 }
 
 const StyledButton = styled.button<IVoidButton>`
@@ -14,6 +15,7 @@ const StyledButton = styled.button<IVoidButton>`
         opacity: 0.8;
     }
     border-radius: ${props => props.rounded ? '10px' : '0px'};
+    color: ${props => props.theme === 'dark' ? 'white' : '#000'};
     ${props => props.block && css`
         display: block;
         width: 100%;
@@ -28,7 +30,8 @@ const StyledButton = styled.button<IVoidButton>`
                 `;
             case 'secondary':
                 return `
-                    background-color: #DEDEDE;
+                    background-color: #fafafa;
+                    color: #000;
                     border: 1px solid #999;
                 `;
         };
@@ -38,22 +41,27 @@ const StyledButton = styled.button<IVoidButton>`
             case 'small':
                 return `
                     padding: 4px 8px;
-                `;
+                    font-size: 11px;
+                    `;
             case 'medium':
                 return `
                     padding: 8px 16px;
+                    font-size: 14px;
                 `;
             case 'large':
                 return `
                     padding: 16px 32px;
+                    font-size: 18px;
                 `;
         };
     }};
 ` as React.FunctionComponent<IVoidButton>;
 
 const VoidButton = ({ label, ...props }) => {
+    const { theme } = useTheme();
+
     return (
-        <StyledButton {...props}>
+        <StyledButton theme={theme} {...props}>
             {label}
         </StyledButton>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ThemeProvider } from '../hooks/useThemeProvider';
 import VoidButton from '../components/voidbutton/VoidButton';
 
 export default {
@@ -23,13 +24,19 @@ export default {
       },
       options: ['small', 'medium', 'large'],
     },
+    block: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+    },
     onClick: {
       action: 'clicked',
     }
   }
 } as ComponentMeta<typeof VoidButton>;
 
-const Template: ComponentStory<typeof VoidButton> = (args) => <VoidButton {...args} />;
+const Template: ComponentStory<typeof VoidButton> = (args) => <ThemeProvider value="dark"><VoidButton {...args} /></ThemeProvider>;
 
 export const VoidButtonPrimary = Template.bind({});
 VoidButtonPrimary.args = {
